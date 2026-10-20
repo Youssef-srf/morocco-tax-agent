@@ -67,4 +67,5 @@ def test_no_headers_footnotes_or_next_title_in_text(articles):
         assert "CODE GÉNÉRAL DES IMPÔTS" not in a.text, a.label
         assert not re.search(r"^TITRE\b", a.text, re.M), a.label
         assert not re.search(r"[a-zé’]\d{3}\b", a.text), a.label  # glued footnote call
+        assert not re.search(r"[-]", a.text), a.label  # private-use glyphs (bullets)
         assert all(57 <= page <= 143 for page in a.pdf_pages), a.label

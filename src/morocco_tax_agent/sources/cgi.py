@@ -120,6 +120,7 @@ def read_page(page) -> tuple[list[dict], list[tuple[int, float]], dict[int, str]
 
 def _clean(lines: list[str]) -> str:
     text = "\n".join(lines)
+    text = re.sub(r"[]\s*", "- ", text)  # bullets of the Symbol font, private Unicode area
     text = re.sub(r"[ \t]+([.,])", r"\1", text)  # "surplus ." left by a removed call
     return re.sub(r"[ \t]{2,}", " ", text).strip()
 

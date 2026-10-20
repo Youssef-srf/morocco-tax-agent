@@ -1,0 +1,17 @@
+# Local PostgreSQL + pgvector, for development and the database tests:
+#   docker compose up -d db
+#   TEST_DATABASE_URL=postgresql://tax:tax@localhost:5432/morocco_tax uv run pytest -q
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: tax
+      POSTGRES_PASSWORD: tax
+      POSTGRES_DB: morocco_tax
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
