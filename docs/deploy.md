@@ -21,8 +21,10 @@ uv run python -m morocco_tax_agent.index data/processed/cgi_2026_ir_articles.jso
 ## 2. API: Hugging Face Docker Space (free)
 
 1. On https://huggingface.co/new-space: SDK **Docker**, hardware **CPU basic (free)**.
-2. In the Space settings, add the secrets `GEMINI_API_KEY`, `GEMINI_MODEL` and
-   `DATABASE_URL` (the Neon string). Optional variables: `ASK_LIMIT_PER_MINUTE`
+2. In the Space settings, add the secrets `GEMINI_API_KEY`, `GEMINI_MODEL`
+   (`gemini-3.5-flash-lite`: the Flash model with the most free requests per day
+   on this project, per AI Studio; `gemini-2.5-flash-lite` is no longer offered
+   to new users) and `DATABASE_URL` (the Neon string). Optional variables: `ASK_LIMIT_PER_MINUTE`
    (default 3), `ASK_LIMIT_PER_DAY` (15 per IP), `ASK_LIMIT_GLOBAL_PER_DAY` (80).
 3. Create a write access token (https://huggingface.co/settings/tokens) and push:
 

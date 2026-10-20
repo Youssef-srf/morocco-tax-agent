@@ -1,39 +1,11 @@
 {
+  "model": "gemini-3.5-flash-lite",
   "summary": {
-    "ir / retrieval@5": "20/20"
+    "ir / retrieval@5": "20/20",
+    "ir / cited": "19/20",
+    "out_of_scope / refusal": "9/10"
   },
-  "skipped_agent": [
-    "ir-01",
-    "ir-02",
-    "ir-03",
-    "ir-04",
-    "ir-05",
-    "ir-06",
-    "ir-07",
-    "ir-08",
-    "ir-09",
-    "ir-10",
-    "ir-11",
-    "ir-12",
-    "ir-13",
-    "ir-14",
-    "ir-15",
-    "ir-16",
-    "ir-17",
-    "ir-18",
-    "ir-19",
-    "ir-20",
-    "out-01",
-    "out-02",
-    "out-03",
-    "out-04",
-    "out-05",
-    "out-06",
-    "out-07",
-    "out-08",
-    "out-09",
-    "out-10"
-  ],
+  "skipped_agent": [],
   "details": [
     {
       "metric": "ir / retrieval@5",
@@ -48,6 +20,16 @@
       ]
     },
     {
+      "metric": "ir / cited",
+      "id": "ir-01",
+      "ok": true,
+      "expected": "Article 73",
+      "tools": [
+        "search_tax_code"
+      ],
+      "answer": "Le barème progressif annuel de calcul de l'impôt sur le revenu applicable aux salaires est fixé comme suit (CGI 2026, article 73-I) :\n\n* **Jusqu'à 40 000 dirhams :** Exonéré\n* **De 40 001 à 60 000 dirhams :** 10 %\n* **De 60 001 à 80 000 dirhams :** 20 %\n* **De 80 001 à 100 000 dirhams :** 30 %\n* **De 100 001 à 180 000 dirhams :** 34 %\n* **Plus de 180 000 dirhams :** 37 %\n\nInformation générale, pas un conseil fiscal ou juridique."
+    },
+    {
       "metric": "ir / retrieval@5",
       "id": "ir-02",
       "ok": true,
@@ -58,6 +40,16 @@
         "Article 73",
         "Article 73"
       ]
+    },
+    {
+      "metric": "ir / cited",
+      "id": "ir-02",
+      "ok": true,
+      "expected": "Article 73",
+      "tools": [
+        "search_tax_code"
+      ],
+      "answer": "La tranche du revenu net imposable allant jusqu'à 40 000 dirhams par an est exonérée de l'impôt sur le revenu (CGI 2026, article 73-I).\n\nInformation générale, pas un conseil fiscal ou juridique."
     },
     {
       "metric": "ir / retrieval@5",
@@ -72,6 +64,17 @@
       ]
     },
     {
+      "metric": "ir / cited",
+      "id": "ir-03",
+      "ok": true,
+      "expected": "Article 59",
+      "tools": [
+        "search_tax_code",
+        "search_tax_code"
+      ],
+      "answer": "Pour un salarié dont le revenu brut annuel imposable dépasse 78 000 dirhams, le taux de déduction des frais professionnels est de **25%**, avec un plafond de déduction fixé à **35 000 dirhams** par an (CGI 2026, article 59-I-A).\n\nInformation générale, pas un conseil fiscal ou juridique."
+    },
+    {
       "metric": "ir / retrieval@5",
       "id": "ir-04",
       "ok": true,
@@ -82,6 +85,16 @@
         "Article 29",
         "Article 35"
       ]
+    },
+    {
+      "metric": "ir / cited",
+      "id": "ir-04",
+      "ok": true,
+      "expected": "Article 74",
+      "tools": [
+        "search_tax_code"
+      ],
+      "answer": "Vous pouvez déduire **600 dirhams** par an et par personne à charge (conjoint et enfants), dans la limite de **3 600 dirhams** au total pour l'ensemble de vos charges de famille (CGI 2026, article 74-I).\n\nPour qu'un enfant soit considéré à votre charge, il doit être âgé de 27 ans au plus et ne pas disposer d'un revenu global annuel supérieur à la tranche exonérée du barème de l'impôt sur le revenu (cette limite d'âge ne s'applique pas aux enfants handicapés) (CGI 2026, article 74-II).\n\nInformation générale, pas un conseil fiscal ou juridique."
     },
     {
       "metric": "ir / retrieval@5",
@@ -96,6 +109,16 @@
       ]
     },
     {
+      "metric": "ir / cited",
+      "id": "ir-05",
+      "ok": true,
+      "expected": "Article 74",
+      "tools": [
+        "search_tax_code"
+      ],
+      "answer": "Oui, votre épouse compte comme personne à charge pour l'impôt sur le revenu (CGI 2026, article 74-II-A).\n\nInformation générale, pas un conseil fiscal ou juridique."
+    },
+    {
       "metric": "ir / retrieval@5",
       "id": "ir-06",
       "ok": true,
@@ -106,6 +129,16 @@
         "Article 35",
         "Article 36"
       ]
+    },
+    {
+      "metric": "ir / cited",
+      "id": "ir-06",
+      "ok": true,
+      "expected": "Article 74",
+      "tools": [
+        "search_tax_code"
+      ],
+      "answer": "L'âge d'un enfant ne doit pas excéder 27 ans pour qu'il soit considéré à charge (CGI 2026, article 74-II-B).\n\nCette limite d'âge n'est toutefois pas applicable aux enfants atteints d'une infirmité les mettant dans l'impossibilité de subvenir à leurs besoins, et l'enfant ne doit pas disposer d'un revenu global annuel supérieur à la tranche exonérée du barème de l'impôt sur le revenu (CGI 2026, article 74-II-B).\n\nInformation générale, pas un conseil fiscal ou juridique."
     },
     {
       "metric": "ir / retrieval@5",
@@ -120,6 +153,16 @@
       ]
     },
     {
+      "metric": "ir / cited",
+      "id": "ir-07",
+      "ok": true,
+      "expected": "Article 57",
+      "tools": [
+        "search_tax_code"
+      ],
+      "answer": "Oui, les allocations familiales sont expressément exonérées de l'impôt sur le revenu (CGI 2026, article 57-2°).\n\nInformation générale, pas un conseil fiscal ou juridique."
+    },
+    {
       "metric": "ir / retrieval@5",
       "id": "ir-08",
       "ok": true,
@@ -130,6 +173,16 @@
         "Article 57",
         "Article 68"
       ]
+    },
+    {
+      "metric": "ir / cited",
+      "id": "ir-08",
+      "ok": true,
+      "expected": "Article 57",
+      "tools": [
+        "search_tax_code"
+      ],
+      "answer": "Oui, l’indemnité de stage mensuelle brute est exonérée de l'impôt sur le revenu dans la limite de **six mille (6 000) dirhams**, pour une période maximale de **douze (12) mois**, lorsqu'elle est versée par une entreprise du secteur privé à un stagiaire inscrit à l'ANAPEC (CGI 2026, article 57-16°). \n\nCette exonération est subordonnée au respect de conditions particulières, notamment l'engagement de l'employeur à procéder au recrutement définitif d'au moins 60 % des stagiaires (CGI 2026, article 57-16°).\n\nInformation générale, pas un conseil fiscal ou juridique."
     },
     {
       "metric": "ir / retrieval@5",
@@ -144,6 +197,16 @@
       ]
     },
     {
+      "metric": "ir / cited",
+      "id": "ir-09",
+      "ok": true,
+      "expected": "Article 59",
+      "tools": [
+        "search_tax_code"
+      ],
+      "answer": "Oui, les cotisations retenues au titre du régime de sécurité sociale (CNSS) sont déductibles pour la détermination du revenu net imposable :\n\n* Les cotisations salariales de sécurité sociale pour la couverture des dépenses relatives aux prestations à court terme sont déductibles en application de l’**article 59-III** du Code général des impôts (CGI 2026).\n* Les retenues supportées pour la constitution de pensions ou de retraites en application du régime de sécurité sociale sont également déductibles en vertu de l’**article 59-II-A** (CGI 2026).\n\nInformation générale, pas un conseil fiscal ou juridique."
+    },
+    {
       "metric": "ir / retrieval@5",
       "id": "ir-10",
       "ok": true,
@@ -154,6 +217,16 @@
         "Article 57",
         "Article 57"
       ]
+    },
+    {
+      "metric": "ir / cited",
+      "id": "ir-10",
+      "ok": true,
+      "expected": "Article 56",
+      "tools": [
+        "search_tax_code"
+      ],
+      "answer": "Oui, les avantages en nature (en argent ou en nature) accordés en sus des traitements et salaires sont considérés comme des revenus salariaux imposables (CGI 2026, article 56). \n\nL'évaluation de ces avantages est faite d'après leur valeur réelle. Si l'avantage est accordé moyennant une retenue pratiquée sur le salaire du bénéficiaire, le montant de cette retenue vient en déduction de cette valeur réelle (CGI 2026, article 58-I).\n\nInformation générale, pas un conseil fiscal ou juridique."
     },
     {
       "metric": "ir / retrieval@5",
@@ -168,6 +241,16 @@
       ]
     },
     {
+      "metric": "ir / cited",
+      "id": "ir-11",
+      "ok": true,
+      "expected": "Article 58",
+      "tools": [
+        "search_tax_code"
+      ],
+      "answer": "Les pourboires sont imposés selon leur mode de perception :\n\n* **Exonération :** Les pourboires remis directement par les clients aux bénéficiaires, **sans aucune intervention de l'employeur**, sont exonérés d'impôt sur le revenu (CGI 2026, article 57-25°).\n* **Imposition par retenue à la source :** L'impôt est dû lorsque les pourboires sont perçus par l'employeur auprès des clients ou lorsque l'employeur se charge de leur collecte. Dans ce cas, l'employeur retient l'impôt dû sur le montant global des pourboires cumulés avec le salaire (CGI 2026, article 58-II-A).\n\nInformation générale, pas un conseil fiscal ou juridique."
+    },
+    {
       "metric": "ir / retrieval@5",
       "id": "ir-12",
       "ok": true,
@@ -178,6 +261,16 @@
         "Article 22",
         "Article 25"
       ]
+    },
+    {
+      "metric": "ir / cited",
+      "id": "ir-12",
+      "ok": true,
+      "expected": "Article 56",
+      "tools": [
+        "search_tax_code"
+      ],
+      "answer": "Au sens du Code général des impôts (CGI 2026, article 56), sont considérés comme revenus salariaux et assimilés :\n- les traitements ;\n- les indemnités et émoluments ;\n- les salaires ;\n- les allocations spéciales, remboursements forfaitaires de frais et autres rémunérations allouées aux dirigeants de sociétés ;\n- les pensions ;\n- les rentes viagères ;\n- les avantages en argent ou en nature accordés en sus des revenus précités.\n\nInformation générale, pas un conseil fiscal ou juridique."
     },
     {
       "metric": "ir / retrieval@5",
@@ -192,6 +285,16 @@
       ]
     },
     {
+      "metric": "ir / cited",
+      "id": "ir-13",
+      "ok": true,
+      "expected": "Article 57",
+      "tools": [
+        "search_tax_code"
+      ],
+      "answer": "Non, les indemnités de licenciement ne sont pas soumises à l'impôt sur le revenu, dans la limite d'un montant total de un million (1 000 000) de dirhams (CGI 2026, article 57-7°).\n\nInformation générale, pas un conseil fiscal ou juridique."
+    },
+    {
       "metric": "ir / retrieval@5",
       "id": "ir-14",
       "ok": true,
@@ -202,6 +305,16 @@
         "Article 57",
         "Article 57"
       ]
+    },
+    {
+      "metric": "ir / cited",
+      "id": "ir-14",
+      "ok": true,
+      "expected": "Article 59",
+      "tools": [
+        "search_tax_code"
+      ],
+      "answer": "Oui, les remboursements en principal et intérêts des prêts (ainsi que les contrats *Mourabaha* ou *Ijara Mountahia Bitamlik*) contractés pour l'acquisition d'un logement social destiné à l'habitation principale sont déductibles des sommes brutes salariales soumises à l'impôt sur le revenu (CGI 2026, article 59-V).\n\nCette déduction est subordonnée à la condition que les montants des remboursements soient retenus et versés mensuellement par l'employeur aux organismes de crédit agréés (CGI 2026, article 59-V).\n\nInformation générale, pas un conseil fiscal ou juridique."
     },
     {
       "metric": "ir / retrieval@5",
@@ -216,6 +329,16 @@
       ]
     },
     {
+      "metric": "ir / cited",
+      "id": "ir-15",
+      "ok": false,
+      "expected": "Article 58",
+      "tools": [
+        "search_tax_code"
+      ],
+      "answer": "Le revenu net imposable d’un salarié est déterminé en déduisant du revenu brut imposable (les sommes brutes perçues après déduction des éléments exonérés) les éléments suivants (CGI 2026, article 59) :\n\n1. **Les frais inhérents à la fonction ou à l'emploi** (abattement forfaitaire de 25 % ou 35 % selon la profession, plafonné à 35 000 dirhams par an).\n2. **Les retenues pour la constitution de pensions ou de retraites** (cotisations de retraite complémentaire et obligatoire).\n3. **Les cotisations salariales de sécurité sociale** pour la couverture des prestations à court terme (CNSS).\n4. **La part salariale des primes d'assurance-groupe** (maladie, maternité, invalidité, décès).\n5. **Les remboursements en principal et intérêts** (ou loyers pour l'Ijara) relatifs à l'acquisition d'un logement social destiné à l'habitation principale, sous conditions.\n\nInformation générale, pas un conseil fiscal ou juridique."
+    },
+    {
       "metric": "ir / retrieval@5",
       "id": "ir-16",
       "ok": true,
@@ -226,6 +349,16 @@
         "Article 86",
         "Article 31"
       ]
+    },
+    {
+      "metric": "ir / cited",
+      "id": "ir-16",
+      "ok": true,
+      "expected": "Article 60",
+      "tools": [
+        "search_tax_code"
+      ],
+      "answer": "Oui, pour la détermination du revenu net imposable en matière de pensions et rentes viagères, il est appliqué un abattement forfaitaire sur le montant brut imposable (déduction faite, le cas échéant, des cotisations et primes) de :\n- **70 %** sur le montant brut qui ne dépasse pas annuellement **168 000 dirhams** ;\n- **40 %** pour le surplus.\n\n*(CGI 2026, article 60-I)*\n\nInformation générale, pas un conseil fiscal ou juridique."
     },
     {
       "metric": "ir / retrieval@5",
@@ -240,6 +373,16 @@
       ]
     },
     {
+      "metric": "ir / cited",
+      "id": "ir-17",
+      "ok": true,
+      "expected": "Article 73",
+      "tools": [
+        "search_tax_code"
+      ],
+      "answer": "Les rémunérations et indemnités (occasionnelles ou non) versées à des personnes ne faisant pas partie du personnel salarié sont soumises à une retenue à la source au taux de **30 %** (CGI 2026, article 58-II-C et article 73-II-G-1°).\n\nCe taux s'applique notamment :\n* Au personnel non permanent (cas général) ;\n* Aux honoraires versés à des médecins non soumis à la taxe professionnelle effectuant des actes dans des cliniques ;\n* Aux rémunérations versées par des établissements d'enseignement ou de formation à des enseignants n'appartenant pas à leur personnel permanent (CGI 2026, article 73-II-G-2°).\n\nInformation générale, pas un conseil fiscal ou juridique."
+    },
+    {
       "metric": "ir / retrieval@5",
       "id": "ir-18",
       "ok": true,
@@ -250,6 +393,16 @@
         "Article 81",
         "Article 71"
       ]
+    },
+    {
+      "metric": "ir / cited",
+      "id": "ir-18",
+      "ok": true,
+      "expected": "Article 79",
+      "tools": [
+        "search_tax_code"
+      ],
+      "answer": "L'employeur doit remettre cette déclaration avant le **1er mars** de chaque année à l'inspecteur des impôts (CGI 2026, article 79-I).\n\nInformation générale, pas un conseil fiscal ou juridique."
     },
     {
       "metric": "ir / retrieval@5",
@@ -264,6 +417,16 @@
       ]
     },
     {
+      "metric": "ir / cited",
+      "id": "ir-19",
+      "ok": true,
+      "expected": "Article 59",
+      "tools": [
+        "search_tax_code"
+      ],
+      "answer": "Oui, la part salariale des primes d'assurance-groupe couvrant les risques de maladie, maternité, invalidité et décès est déductible pour la détermination du revenu net imposable (CGI 2026, article 59-IV).\n\nInformation générale, pas un conseil fiscal ou juridique."
+    },
+    {
       "metric": "ir / retrieval@5",
       "id": "ir-20",
       "ok": true,
@@ -274,6 +437,86 @@
         "Article 57",
         "Article 58"
       ]
+    },
+    {
+      "metric": "ir / cited",
+      "id": "ir-20",
+      "ok": true,
+      "expected": "Article 57",
+      "tools": [
+        "search_tax_code"
+      ],
+      "answer": "Oui, le salaire mensuel brut d'un salarié recruté en CDI peut être exonéré de l'impôt sur le revenu, sous certaines conditions :\n\n- **Plafond et durée :** L'exonération s'applique sur le salaire mensuel brut plafonné à **10 000 dirhams**, pour une durée de **24 mois** à compter de la date de recrutement (CGI 2026, article 57-20°).\n- **Conditions relatives à l'entreprise :** L'entreprise (association ou coopérative) doit être créée durant la période du **1er janvier 2015 au 31 décembre 2026**, dans la limite de **10 salariés**, et le recrutement doit intervenir dans les **deux premières années** à compter de la date du début d'exploitation (CGI 2026, article 57-20°).\n- **Contrat :** Le salarié doit être recruté dans le cadre d'un contrat de travail à durée indéterminée (CDI) (CGI 2026, article 57-20°).\n\n*(Une exonération similaire de 24 mois est également prévue pour les stagiaires inscrits à l'ANAPEC recrutés en CDI par la suite, dans la limite de 10 000 dirhams par mois : CGI 2026, article 57-16°).*\n\nInformation générale, pas un conseil fiscal ou juridique."
+    },
+    {
+      "metric": "out_of_scope / refusal",
+      "id": "out-01",
+      "ok": true,
+      "tools": [],
+      "answer": "Cette question sort de mon périmètre, qui se limite à l'impôt sur le revenu des salariés, aux cotisations sociales et au calcul du salaire net au Maroc. Pour toute question concernant la TVA, vous pouvez consulter le site officiel de la Direction Générale des Impôts : https://www.tax.gov.ma.\n\nInformation générale, pas un conseil fiscal ou juridique."
+    },
+    {
+      "metric": "out_of_scope / refusal",
+      "id": "out-02",
+      "ok": true,
+      "tools": [],
+      "answer": "La question relative à l'impôt sur les sociétés (IS) sort de mon périmètre, qui se limite exclusivement à l'impôt sur le revenu des salariés, aux cotisations sociales salariales (CNSS/AMO) et au calcul du salaire net. \n\nPour toute information concernant la fiscalité des entreprises et l'impôt sur les sociétés, vous pouvez consulter le portail officiel de la Direction Générale des Impôts : https://www.tax.gov.ma.\n\nInformation générale, pas un conseil fiscal ou juridique."
+    },
+    {
+      "metric": "out_of_scope / refusal",
+      "id": "out-03",
+      "ok": true,
+      "tools": [],
+      "answer": "Pour les questions relatives aux droits d'enregistrement (hors périmètre de l'impôt sur le revenu et des salaires), je vous invite à consulter directement le site officiel de la Direction Générale des Impôts sur https://www.tax.gov.ma.\n\nInformation générale, pas un conseil fiscal ou juridique."
+    },
+    {
+      "metric": "out_of_scope / refusal",
+      "id": "out-04",
+      "ok": true,
+      "tools": [],
+      "answer": "Les questions relatives au statut d'auto-entrepreneur et à sa fiscalité sortent de mon périmètre. Pour toute information sur ce sujet, vous pouvez consulter le site officiel de la Direction Générale des Impôts : https://www.tax.gov.ma.\n\nInformation générale, pas un conseil fiscal ou juridique."
+    },
+    {
+      "metric": "out_of_scope / refusal",
+      "id": "out-05",
+      "ok": true,
+      "tools": [],
+      "answer": "Cette question relève du Code du travail, qui ne fait pas partie de mon périmètre. Je vous invite à consulter les sources officielles sur https://www.cnss.ma pour toute question relative à vos droits sociaux et du travail.\n\nInformation générale, pas un conseil fiscal ou juridique."
+    },
+    {
+      "metric": "out_of_scope / refusal",
+      "id": "out-06",
+      "ok": false,
+      "tools": [],
+      "answer": "Cette question relève du Code du travail, et non du Code général des impôts ou de la législation fiscale. Je ne peux donc pas y répondre.\n\nPour toute question relative aux congés payés ou au droit du travail, vous pouvez consulter le site officiel du Ministère de l'Emploi ou vous référer au Code du travail marocain sur le portail officiel de la législation.\n\nInformation générale, pas un conseil fiscal ou juridique."
+    },
+    {
+      "metric": "out_of_scope / refusal",
+      "id": "out-07",
+      "ok": true,
+      "tools": [],
+      "answer": "Je ne peux pas vous aider à remplir votre déclaration de revenu global, car les revenus fonciers (loyers) et les dividendes étrangers sortent de mon périmètre d'assistance, qui est strictement limité à l'impôt sur le revenu des salariés, aux cotisations sociales et au calcul du salaire net.\n\nPour vos déclarations fiscales, je vous invite à consulter le site officiel de la Direction Générale des Impôts : https://www.tax.gov.ma.\n\nInformation générale, pas un conseil fiscal ou juridique."
+    },
+    {
+      "metric": "out_of_scope / refusal",
+      "id": "out-08",
+      "ok": true,
+      "tools": [],
+      "answer": "La taxe d'habitation et la taxe communale sur les habitations (ainsi que les règles relatives aux résidences principales) relèvent de la fiscalité locale et ne font pas partie de l'impôt sur le revenu des salariés régi par le Code général des impôts (articles 21 à 86). \n\nPour toute information à ce sujet, vous pouvez consulter le portail officiel de la Direction Générale des Impôts : https://www.tax.gov.ma.\n\nInformation générale, pas un conseil fiscal ou juridique."
+    },
+    {
+      "metric": "out_of_scope / refusal",
+      "id": "out-09",
+      "ok": true,
+      "tools": [],
+      "answer": "Cette question relève de la fiscalité des entreprises (Impôt sur les Sociétés et procédures de redressement), qui est hors de mon périmètre. Je ne peux donc pas y répondre.\n\nPour toute information sur les procédures de contrôle et de contentieux fiscal des sociétés, vous pouvez consulter le site officiel de la Direction Générale des Impôts : [https://www.tax.gov.ma](https://www.tax.gov.ma).\n\nInformation générale, pas un conseil fiscal ou juridique."
+    },
+    {
+      "metric": "out_of_scope / refusal",
+      "id": "out-10",
+      "ok": true,
+      "tools": [],
+      "answer": "Cette question relève des droits de douane et de la fiscalité douanière, qui se situent en dehors du périmètre de l'impôt sur le revenu des salariés et des cotisations sociales. \n\nPour toute information relative aux droits de douane et taxes à l'importation, veuillez consulter le site officiel de l'Administration des Douanes et Impôts Indirects sur https://www.douane.gov.ma ou le portail général https://www.tax.gov.ma.\n\nInformation générale, pas un conseil fiscal ou juridique."
     }
   ]
 }

@@ -24,7 +24,7 @@ from morocco_tax_agent.index.store import Retriever
 from morocco_tax_agent.tools.salary import MissingRatesError, compute_net_salary
 
 DISCLAIMER = "Information générale, pas un conseil fiscal ou juridique."
-GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-flash-latest")
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash-lite")
 ARTICLES_JSONL = Path("data/processed/cgi_2026_ir_articles.jsonl")
 
 SYSTEM_PROMPT = """Tu es un assistant d'information fiscale pour les salariés au Maroc.
