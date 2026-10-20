@@ -1,0 +1,15 @@
+# Secrets : jamais sur GitHub
+.env
+
+# Environnement Python
+.venv/
+__pycache__/
+*.pyc
+
+# Données : régénérées par les scripts, jamais versionnées
+data/
+
+# Outils
+.ipynb_checkpoints/
+mlruns/
+.DS_Store
