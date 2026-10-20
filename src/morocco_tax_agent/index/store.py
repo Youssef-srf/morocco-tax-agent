@@ -12,6 +12,7 @@ from __future__ import annotations
 import math
 import os
 import re
+import time
 from typing import Protocol
 
 from pydantic import BaseModel
@@ -20,6 +21,8 @@ from morocco_tax_agent.index.chunks import Chunk
 
 EMBEDDING_MODEL = os.environ.get("EMBEDDING_MODEL", "gemini-embedding-001")
 EMBEDDING_DIM = 768
+BATCH_SIZE = 10  # small batches stay under the free tier's tokens-per-minute limit
+MAX_RETRIES = 8
 ARTICLE_MENTION = re.compile(
     r"\barticle\s+(\d+)(?:\s+(bis|ter|quater|quinquies))?\b", re.IGNORECASE
 )
@@ -46,14 +49,22 @@ class GeminiEmbedder:
         self.client, self.model, self.dim = genai.Client(), model, dim
 
     def _embed(self, texts: list[str], task_type: str) -> list[list[float]]:
-        from google.genai import types
+        from google.genai import errors, types
 
         config = types.EmbedContentConfig(task_type=task_type, output_dimensionality=self.dim)
         vectors: list[list[float]] = []
-        for i in range(0, len(texts), 100):  # API batch limit
-            response = self.client.models.embed_content(
-                model=self.model, contents=texts[i:i + 100], config=config
-            )
+        for i in range(0, len(texts), BATCH_SIZE):
+            for attempt in range(MAX_RETRIES):
+                try:
+                    response = self.client.models.embed_content(
+                        model=self.model, contents=texts[i:i + BATCH_SIZE], config=config
+                    )
+                    break
+                except errors.ClientError as error:
+                    # Rate limit (tokens per minute): wait for the quota window, then retry.
+                    if error.code != 429 or attempt == MAX_RETRIES - 1:
+                        raise
+                    time.sleep(min(2 ** attempt * 5, 60))
             vectors += [e.values for e in response.embeddings]
         return vectors
 
