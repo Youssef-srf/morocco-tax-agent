@@ -1,0 +1,32 @@
+# Rates for the 2026 tax year, copied from the official texts only.
+# tests/test_rates.py checks every value below against the official text.
+
+year: 2026
+
+income_tax:
+  # CGI 2026, article 73-I. Annual net taxable income, in dirhams.
+  brackets:
+    - {up_to: 40000, percent: 0}
+    - {up_to: 60000, percent: 10}
+    - {up_to: 80000, percent: 20}
+    - {up_to: 100000, percent: 30}
+    - {up_to: 180000, percent: 34}
+    - {up_to: null, percent: 37}
+
+  # CGI 2026, article 59-I-A (general case, not the professions of 59-I-B/C).
+  professional_expenses:
+    threshold: 78000       # annual gross taxable income
+    percent_up_to_threshold: 35
+    percent_above_threshold: 25
+    cap: 35000             # annual, applies above the threshold
+
+  # CGI 2026, article 74-I, as amended by finance law 50-25 (2026).
+  family_reduction:
+    per_dependent: 600     # annual
+    cap: 3600              # annual
+
+# Employee CNSS and AMO contributions (deductible under CGI article 59-II
+# and 59-III). Not filled yet: the image published on cnss.ma
+# (/sites/default/files/2026-05/cotisations.webp) is an illustration with
+# no figures. Fill from an official CNSS document, checked by Youssef.
+social: null
