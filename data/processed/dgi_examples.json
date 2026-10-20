@@ -1,0 +1,52 @@
+{
+  "retrieved_on": "2026-10-20",
+  "note": "Worked examples published by the DGI (Direction générale des impôts), excerpts copied verbatim from the PDF text (whitespace collapsed). Used by tests/test_official_examples.py as the reference for the calculator: no number here comes from our own computation.",
+  "examples": [
+    {
+      "id": "nc733-ex1",
+      "source": "https://www.tax.gov.ma/wps/wcm/connect/070abc0f-a958-4cf9-84be-7e9b76434063/NC+N%C2%B0+733+relative+aux+mesures+fiscales+de+la+LF+2023+vf.pdf?MOD=AJPERES",
+      "document": "Note circulaire n° 733 (LF 2023), pages 34-35, Exemple n°1",
+      "excerpts": [
+        "La rémunération annuelle brute d’un salarié célibataire d’une société commerciale est constituée au titre de l’année 2023 comme suit : ● salaire de base : ………………………………………………………….. 150 000 DH ● prime d’ancienneté : ………………………………..………………….… 70 000 DH ● logement : ……………………………………………….…………………… 30 000 DH ● frais de déplacement justifiés : ……………………………………….. 15 000 DH ● total de la rémunération brute : …………………………………….. 265 000 DH",
+        "● revenu brut imposable : 265 000 – 15 000 : .……………….….. 250 000 DH ● base de calcul des frais : 250 000 – 30 000 : ……..……….…… 220 000 DH ● frais à déduire : 220 000 x 25% : …………………….………….…… 55 000 DH ● plafond admis en déduction : ………………………………………..…. 35 000 DH",
+        "● retenues au titre des prestations sociales à long terme : 72 000 (plafond mensuel de 6 000 DH) x 3.96% = 2 851.20 DH ● retenues au titre des prestations sociales à court terme : 72 000 (plafond mensuel de 6000 DH) x 0.52% = 374.40 DH ● retenues au titre de l’AMO : 250 000 x 2.26% = 5 650 DH ● revenu net imposable : 250 000 – 35 000 – 2 851.20 – 374.40 – 5 650 = 206 125 DH"
+      ],
+      "annual_inputs": {"gross": "265000", "taxable_gross": "250000", "contributable_gross": "250000", "dependents": 0},
+      "expected_annual": {
+        "CNSS long terme": "2 851.20",
+        "CNSS court terme": "374.40",
+        "AMO": "5 650",
+        "professional_expenses": "35 000",
+        "net_taxable": "206 125"
+      }
+    },
+    {
+      "id": "nc736-p23",
+      "source": "https://www.tax.gov.ma/wps/wcm/connect/ad04626f-6168-40d0-8f70-8e453a925bdc/Note+Circulaire++n%C2%B0+736+relative+aux+mesures+fiscales+de+la+LF+2025.pdf?MOD=AJPERES",
+      "document": "Note circulaire n° 736 (LF 2025), page 23, Exemple n° 1, cas 2",
+      "excerpts": ["- Impôt brut : (206 400 x 37%) – 27 400 ……………………..……………..….. 48 968 DH"],
+      "scale": {"net_taxable": "206 400", "tax": "48 968"}
+    },
+    {
+      "id": "nc736-p25",
+      "source": "https://www.tax.gov.ma/wps/wcm/connect/ad04626f-6168-40d0-8f70-8e453a925bdc/Note+Circulaire++n%C2%B0+736+relative+aux+mesures+fiscales+de+la+LF+2025.pdf?MOD=AJPERES",
+      "document": "Note circulaire n° 736 (LF 2025), page 25, Exemple n° 2",
+      "excerpts": ["- Impôt brut : (278 000 x 37%) – 27 400 ……………………………………….. 75 460 DH"],
+      "scale": {"net_taxable": "278 000", "tax": "75 460"}
+    },
+    {
+      "id": "nc736-p26",
+      "source": "https://www.tax.gov.ma/wps/wcm/connect/ad04626f-6168-40d0-8f70-8e453a925bdc/Note+Circulaire++n%C2%B0+736+relative+aux+mesures+fiscales+de+la+LF+2025.pdf?MOD=AJPERES",
+      "document": "Note circulaire n° 736 (LF 2025), page 26, Exemple n° 3, cas 2",
+      "excerpts": ["- Impôt brut : (271 600 x 37%) – 27 400 ……………………………………..….. 73 092 DH"],
+      "scale": {"net_taxable": "271 600", "tax": "73 092"}
+    },
+    {
+      "id": "nc736-p18",
+      "source": "https://www.tax.gov.ma/wps/wcm/connect/ad04626f-6168-40d0-8f70-8e453a925bdc/Note+Circulaire++n%C2%B0+736+relative+aux+mesures+fiscales+de+la+LF+2025.pdf?MOD=AJPERES",
+      "document": "Note circulaire n° 736 (LF 2025), page 18, Exemple n° 1 (pension)",
+      "excerpts": ["Montant de l’IR calculé : (88 800 x 30%) – 18 000 :……..……….... 8 640 DH"],
+      "scale": {"net_taxable": "88 800", "tax": "8 640"}
+    }
+  ]
+}

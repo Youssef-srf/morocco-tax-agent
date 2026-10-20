@@ -60,9 +60,11 @@ class GeminiEmbedder:
                         model=self.model, contents=texts[i:i + BATCH_SIZE], config=config
                     )
                     break
-                except errors.ClientError as error:
-                    # Rate limit (tokens per minute): wait for the quota window, then retry.
-                    if error.code != 429 or attempt == MAX_RETRIES - 1:
+                except (errors.ClientError, errors.ServerError) as error:
+                    # Rate limit (429, tokens per minute) or transient server error (5xx):
+                    # wait, then retry.
+                    retryable = error.code == 429 or error.code >= 500
+                    if not retryable or attempt == MAX_RETRIES - 1:
                         raise
                     time.sleep(min(2 ** attempt * 5, 60))
             vectors += [e.values for e in response.embeddings]

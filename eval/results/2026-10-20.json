@@ -1,0 +1,279 @@
+{
+  "summary": {
+    "ir / retrieval@5": "20/20"
+  },
+  "skipped_agent": [
+    "ir-01",
+    "ir-02",
+    "ir-03",
+    "ir-04",
+    "ir-05",
+    "ir-06",
+    "ir-07",
+    "ir-08",
+    "ir-09",
+    "ir-10",
+    "ir-11",
+    "ir-12",
+    "ir-13",
+    "ir-14",
+    "ir-15",
+    "ir-16",
+    "ir-17",
+    "ir-18",
+    "ir-19",
+    "ir-20",
+    "out-01",
+    "out-02",
+    "out-03",
+    "out-04",
+    "out-05",
+    "out-06",
+    "out-07",
+    "out-08",
+    "out-09",
+    "out-10"
+  ],
+  "details": [
+    {
+      "metric": "ir / retrieval@5",
+      "id": "ir-01",
+      "ok": true,
+      "top5": [
+        "Article 73",
+        "Article 73",
+        "Article 56",
+        "Article 58",
+        "Article 79"
+      ]
+    },
+    {
+      "metric": "ir / retrieval@5",
+      "id": "ir-02",
+      "ok": true,
+      "top5": [
+        "Article 57",
+        "Article 86",
+        "Article 57",
+        "Article 73",
+        "Article 73"
+      ]
+    },
+    {
+      "metric": "ir / retrieval@5",
+      "id": "ir-03",
+      "ok": true,
+      "top5": [
+        "Article 59",
+        "Article 42 bis",
+        "Article 45 bis",
+        "Article 73",
+        "Article 40"
+      ]
+    },
+    {
+      "metric": "ir / retrieval@5",
+      "id": "ir-04",
+      "ok": true,
+      "top5": [
+        "Article 74",
+        "Article 75",
+        "Article 28",
+        "Article 29",
+        "Article 35"
+      ]
+    },
+    {
+      "metric": "ir / retrieval@5",
+      "id": "ir-05",
+      "ok": true,
+      "top5": [
+        "Article 74",
+        "Article 75",
+        "Article 29",
+        "Article 35",
+        "Article 26"
+      ]
+    },
+    {
+      "metric": "ir / retrieval@5",
+      "id": "ir-06",
+      "ok": true,
+      "top5": [
+        "Article 74",
+        "Article 75",
+        "Article 29",
+        "Article 35",
+        "Article 36"
+      ]
+    },
+    {
+      "metric": "ir / retrieval@5",
+      "id": "ir-07",
+      "ok": true,
+      "top5": [
+        "Article 74",
+        "Article 57",
+        "Article 75",
+        "Article 68",
+        "Article 58"
+      ]
+    },
+    {
+      "metric": "ir / retrieval@5",
+      "id": "ir-08",
+      "ok": true,
+      "top5": [
+        "Article 57",
+        "Article 57",
+        "Article 57",
+        "Article 57",
+        "Article 68"
+      ]
+    },
+    {
+      "metric": "ir / retrieval@5",
+      "id": "ir-09",
+      "ok": true,
+      "top5": [
+        "Article 59",
+        "Article 28",
+        "Article 35",
+        "Article 58",
+        "Article 73"
+      ]
+    },
+    {
+      "metric": "ir / retrieval@5",
+      "id": "ir-10",
+      "ok": true,
+      "top5": [
+        "Article 56",
+        "Article 58",
+        "Article 57",
+        "Article 57",
+        "Article 57"
+      ]
+    },
+    {
+      "metric": "ir / retrieval@5",
+      "id": "ir-11",
+      "ok": true,
+      "top5": [
+        "Article 58",
+        "Article 57",
+        "Article 73",
+        "Article 57",
+        "Article 73"
+      ]
+    },
+    {
+      "metric": "ir / retrieval@5",
+      "id": "ir-12",
+      "ok": true,
+      "top5": [
+        "Article 56",
+        "Article 71",
+        "Article 58",
+        "Article 22",
+        "Article 25"
+      ]
+    },
+    {
+      "metric": "ir / retrieval@5",
+      "id": "ir-13",
+      "ok": true,
+      "top5": [
+        "Article 57",
+        "Article 58",
+        "Article 56",
+        "Article 73",
+        "Article 57"
+      ]
+    },
+    {
+      "metric": "ir / retrieval@5",
+      "id": "ir-14",
+      "ok": true,
+      "top5": [
+        "Article 28",
+        "Article 59",
+        "Article 35",
+        "Article 57",
+        "Article 57"
+      ]
+    },
+    {
+      "metric": "ir / retrieval@5",
+      "id": "ir-15",
+      "ok": true,
+      "top5": [
+        "Article 58",
+        "Article 56",
+        "Article 69",
+        "Article 59",
+        "Article 25"
+      ]
+    },
+    {
+      "metric": "ir / retrieval@5",
+      "id": "ir-16",
+      "ok": true,
+      "top5": [
+        "Article 76",
+        "Article 57",
+        "Article 60",
+        "Article 86",
+        "Article 31"
+      ]
+    },
+    {
+      "metric": "ir / retrieval@5",
+      "id": "ir-17",
+      "ok": true,
+      "top5": [
+        "Article 45 bis",
+        "Article 73",
+        "Article 58",
+        "Article 42 bis",
+        "Article 60"
+      ]
+    },
+    {
+      "metric": "ir / retrieval@5",
+      "id": "ir-18",
+      "ok": true,
+      "top5": [
+        "Article 79",
+        "Article 80",
+        "Article 82",
+        "Article 81",
+        "Article 71"
+      ]
+    },
+    {
+      "metric": "ir / retrieval@5",
+      "id": "ir-19",
+      "ok": true,
+      "top5": [
+        "Article 59",
+        "Article 35",
+        "Article 57",
+        "Article 28",
+        "Article 57"
+      ]
+    },
+    {
+      "metric": "ir / retrieval@5",
+      "id": "ir-20",
+      "ok": true,
+      "top5": [
+        "Article 57",
+        "Article 57",
+        "Article 57",
+        "Article 57",
+        "Article 58"
+      ]
+    }
+  ]
+}

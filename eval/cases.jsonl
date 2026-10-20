@@ -1,30 +1,30 @@
-{"id": "ir-01", "block": "ir", "question": "Quel est le barème de l'impôt sur le revenu applicable aux salaires en 2026 ?", "expected_article": null}
-{"id": "ir-02", "block": "ir", "question": "Jusqu'à quel revenu annuel un salarié ne paie-t-il pas d'impôt sur le revenu ?", "expected_article": null}
-{"id": "ir-03", "block": "ir", "question": "Quel taux de frais professionnels s'applique à un salarié dont le revenu brut annuel dépasse 78 000 dirhams ?", "expected_article": null}
-{"id": "ir-04", "block": "ir", "question": "Combien puis-je déduire de mon impôt pour chaque enfant à charge ?", "expected_article": null}
-{"id": "ir-05", "block": "ir", "question": "Mon épouse compte-t-elle comme personne à charge pour l'impôt sur le revenu ?", "expected_article": null}
-{"id": "ir-06", "block": "ir", "question": "Jusqu'à quel âge un enfant peut-il être considéré à charge ?", "expected_article": null}
-{"id": "ir-07", "block": "ir", "question": "Les allocations familiales sont-elles imposables ?", "expected_article": null}
-{"id": "ir-08", "block": "ir", "question": "L'indemnité de stage est-elle exonérée d'impôt sur le revenu, et jusqu'à quel montant ?", "expected_article": null}
-{"id": "ir-09", "block": "ir", "question": "Les cotisations CNSS retenues sur mon salaire sont-elles déductibles du revenu imposable ?", "expected_article": null}
-{"id": "ir-10", "block": "ir", "question": "Les avantages en nature fournis par l'employeur sont-ils imposables ?", "expected_article": null}
-{"id": "ir-11", "block": "ir", "question": "Comment sont imposés les pourboires ?", "expected_article": null}
-{"id": "ir-12", "block": "ir", "question": "Qu'est-ce qu'un revenu salarial au sens du Code général des impôts ?", "expected_article": null}
-{"id": "ir-13", "block": "ir", "question": "Les indemnités de licenciement sont-elles soumises à l'impôt sur le revenu ?", "expected_article": null}
-{"id": "ir-14", "block": "ir", "question": "Les remboursements d'un prêt pour un logement social sont-ils déductibles du salaire imposable ?", "expected_article": null}
-{"id": "ir-15", "block": "ir", "question": "Comment est calculé le revenu net imposable d'un salarié ?", "expected_article": null}
-{"id": "ir-16", "block": "ir", "question": "Une pension de retraite bénéficie-t-elle d'un abattement ?", "expected_article": null}
-{"id": "ir-17", "block": "ir", "question": "Quel taux de retenue à la source s'applique aux rémunérations versées à des personnes qui ne font pas partie du personnel ?", "expected_article": null}
-{"id": "ir-18", "block": "ir", "question": "Avant quelle date l'employeur doit-il déclarer les salaires versés l'année précédente ?", "expected_article": null}
-{"id": "ir-19", "block": "ir", "question": "La part salariale de l'assurance-groupe maladie est-elle déductible ?", "expected_article": null}
-{"id": "ir-20", "block": "ir", "question": "Un salarié recruté en CDI pour son premier emploi bénéficie-t-il d'une exonération ?", "expected_article": null}
-{"id": "out-01", "block": "out_of_scope", "question": "Quel est le taux normal de la TVA au Maroc ?", "expected_refusal": null}
-{"id": "out-02", "block": "out_of_scope", "question": "Comment calculer l'impôt sur les sociétés de ma SARL ?", "expected_refusal": null}
-{"id": "out-03", "block": "out_of_scope", "question": "Combien coûtent les droits d'enregistrement pour l'achat d'un appartement ?", "expected_refusal": null}
-{"id": "out-04", "block": "out_of_scope", "question": "Comment devenir auto-entrepreneur et quel est mon taux d'imposition ?", "expected_refusal": null}
-{"id": "out-05", "block": "out_of_scope", "question": "Mon employeur peut-il me licencier sans préavis ?", "expected_refusal": null}
-{"id": "out-06", "block": "out_of_scope", "question": "À combien de jours de congé payé ai-je droit par an ?", "expected_refusal": null}
-{"id": "out-07", "block": "out_of_scope", "question": "J'ai un salaire, des loyers et des dividendes étrangers : remplis ma déclaration de revenu global.", "expected_refusal": null}
-{"id": "out-08", "block": "out_of_scope", "question": "Quelle taxe d'habitation dois-je payer sur ma résidence principale ?", "expected_refusal": null}
-{"id": "out-09", "block": "out_of_scope", "question": "Comment contester un redressement fiscal de ma société ?", "expected_refusal": null}
-{"id": "out-10", "block": "out_of_scope", "question": "Quels droits de douane s'appliquent à l'importation d'une voiture ?", "expected_refusal": null}
+{"id": "ir-01", "block": "ir", "question": "Quel est le barème de l'impôt sur le revenu applicable aux salaires en 2026 ?", "expected_article": "Article 73", "evidence": "Le barème de calcul de l'impôt sur le revenu est fixé comme suit"}
+{"id": "ir-02", "block": "ir", "question": "Jusqu'à quel revenu annuel un salarié ne paie-t-il pas d'impôt sur le revenu ?", "expected_article": "Article 73", "evidence": "la tranche du revenu allant jusqu'à 40 000 dirhams est exonérée"}
+{"id": "ir-03", "block": "ir", "question": "Quel taux de frais professionnels s'applique à un salarié dont le revenu brut annuel dépasse 78 000 dirhams ?", "expected_article": "Article 59", "evidence": "Ce taux est fixé à 25% pour les personnes dont le revenu brut annuel imposable est supérieur à soixante dix huit mille (78 000) dirhams"}
+{"id": "ir-04", "block": "ir", "question": "Combien puis-je déduire de mon impôt pour chaque enfant à charge ?", "expected_article": "Article 74", "evidence": "une somme de six cents (600) dirhams par personne à charge"}
+{"id": "ir-05", "block": "ir", "question": "Mon épouse compte-t-elle comme personne à charge pour l'impôt sur le revenu ?", "expected_article": "Article 74", "evidence": "II.- Sont à la charge du contribuable : A.- son épouse ;"}
+{"id": "ir-06", "block": "ir", "question": "Jusqu'à quel âge un enfant peut-il être considéré à charge ?", "expected_article": "Article 74", "evidence": "que leur âge n'excède pas 27 ans"}
+{"id": "ir-07", "block": "ir", "question": "Les allocations familiales sont-elles imposables ?", "expected_article": "Article 57", "evidence": "2°- les allocations familiales et d'assistance à la famille ;"}
+{"id": "ir-08", "block": "ir", "question": "L'indemnité de stage est-elle exonérée d'impôt sur le revenu, et jusqu'à quel montant ?", "expected_article": "Article 57", "evidence": "l’indemnité de stage mensuelle brute plafonnée à six mille (6.000) dirhams"}
+{"id": "ir-09", "block": "ir", "question": "Les cotisations CNSS retenues sur mon salaire sont-elles déductibles du revenu imposable ?", "expected_article": "Article 59", "evidence": "les cotisations salariales de sécurité sociale pour la couverture des dépenses relatives aux prestations à court terme"}
+{"id": "ir-10", "block": "ir", "question": "Les avantages en nature fournis par l'employeur sont-ils imposables ?", "expected_article": "Article 56", "evidence": "les avantages en argent ou en nature accordés en sus des revenus"}
+{"id": "ir-11", "block": "ir", "question": "Comment sont imposés les pourboires ?", "expected_article": "Article 58", "evidence": "L’impôt dû au titre des pourboires est retenu à la source"}
+{"id": "ir-12", "block": "ir", "question": "Qu'est-ce qu'un revenu salarial au sens du Code général des impôts ?", "expected_article": "Article 56", "evidence": "Sont considérés comme revenus salariaux pour l'application de l'impôt sur le revenu"}
+{"id": "ir-13", "block": "ir", "question": "Les indemnités de licenciement sont-elles soumises à l'impôt sur le revenu ?", "expected_article": "Article 57", "evidence": "dans la limite d’un million (1000000) dirhams au titre du montant total des indemnités suivantes : a) l’indemnité de licenciement"}
+{"id": "ir-14", "block": "ir", "question": "Les remboursements d'un prêt pour un logement social sont-ils déductibles du salaire imposable ?", "expected_article": "Article 59", "evidence": "Les remboursements en principal et intérêts des prêts contractés"}
+{"id": "ir-15", "block": "ir", "question": "Comment est calculé le revenu net imposable d'un salarié ?", "expected_article": "Article 58", "evidence": "Le montant du revenu net imposable est obtenu en déduisant des sommes brutes"}
+{"id": "ir-16", "block": "ir", "question": "Une pension de retraite bénéficie-t-elle d'un abattement ?", "expected_article": "Article 60", "evidence": "un abattement forfaitaire de : - 70% sur le montant brut qui ne dépasse pas annuellement 168 000 dirhams"}
+{"id": "ir-17", "block": "ir", "question": "Quel taux de retenue à la source s'applique aux rémunérations versées à des personnes qui ne font pas partie du personnel ?", "expected_article": "Article 73", "evidence": "1°- pour les rémunérations, les indemnités occasionnelles ou non prévues à l’article 58-II-C ci-dessus, si elles sont versées à des personnes ne faisant pas partie du personnel permanent de l’employeur"}
+{"id": "ir-18", "block": "ir", "question": "Avant quelle date l'employeur doit-il déclarer les salaires versés l'année précédente ?", "expected_article": "Article 79", "evidence": "remettre avant le 1 mars de chaque année"}
+{"id": "ir-19", "block": "ir", "question": "La part salariale de l'assurance-groupe maladie est-elle déductible ?", "expected_article": "Article 59", "evidence": "IV.- La part salariale des primes d'assurance-groupe couvrant les risques de maladie, maternité, invalidité et décès."}
+{"id": "ir-20", "block": "ir", "question": "Un salarié recruté en CDI par une entreprise nouvellement créée est-il exonéré d'impôt sur le revenu ?", "expected_article": "Article 57", "evidence": "le salaire mensuel brut plafonné à dix mille (10.000) dirhams, pour une durée de vingt quatre (24) mois à compter de la date de recrutement du salarié"}
+{"id": "out-01", "block": "out_of_scope", "question": "Quel est le taux normal de la TVA au Maroc ?", "expected_refusal": true}
+{"id": "out-02", "block": "out_of_scope", "question": "Comment calculer l'impôt sur les sociétés de ma SARL ?", "expected_refusal": true}
+{"id": "out-03", "block": "out_of_scope", "question": "Combien coûtent les droits d'enregistrement pour l'achat d'un appartement ?", "expected_refusal": true}
+{"id": "out-04", "block": "out_of_scope", "question": "Comment devenir auto-entrepreneur et quel est mon taux d'imposition ?", "expected_refusal": true}
+{"id": "out-05", "block": "out_of_scope", "question": "Mon employeur peut-il me licencier sans préavis ?", "expected_refusal": true}
+{"id": "out-06", "block": "out_of_scope", "question": "À combien de jours de congé payé ai-je droit par an ?", "expected_refusal": true}
+{"id": "out-07", "block": "out_of_scope", "question": "J'ai un salaire, des loyers et des dividendes étrangers : remplis ma déclaration de revenu global.", "expected_refusal": true}
+{"id": "out-08", "block": "out_of_scope", "question": "Quelle taxe d'habitation dois-je payer sur ma résidence principale ?", "expected_refusal": true}
+{"id": "out-09", "block": "out_of_scope", "question": "Comment contester un redressement fiscal de ma société ?", "expected_refusal": true}
+{"id": "out-10", "block": "out_of_scope", "question": "Quels droits de douane s'appliquent à l'importation d'une voiture ?", "expected_refusal": true}

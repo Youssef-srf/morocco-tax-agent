@@ -52,7 +52,10 @@ Youssef doit pouvoir les défendre en entretien. Garde-les, ou propose explicite
 ## Règles
 
 - Ne jamais commiter de PDF, de `.env`, de clé d'API ni de donnée personnelle. Les bulletins de paie de test ne gardent que le mois, le brut, le brut cotisable CNSS, le brut imposable, la situation familiale et le net : ni nom, ni CIN, ni numéro CNSS.
-- **La vérité terrain vient de Youssef, pas de l'IA** : l'article attendu de chaque question d'évaluation et le net des bulletins réels. Tu peux proposer des formulations de questions, jamais les réponses attendues.
+- **C'est Claude qui remplit l'évaluation, mais la vérité terrain doit rester vérifiable sans lui faire confiance** (règle de Youssef, 20 oct) :
+  - Question CGI : `expected_article` + `evidence`, une citation exacte du texte officiel. Un test échoue si la citation n'apparaît pas mot pour mot dans l'article du JSONL (seuls les espaces et retours à la ligne sont normalisés).
+  - Hors périmètre : `expected_refusal`.
+  - Calculateur : **jamais le propre calcul de Claude comme référence**. Seulement des exemples chiffrés officiels (DGI, CNSS), un simulateur officiel ou des bulletins réels, avec la source de chaque cas. S'il n'en trouve pas, il le dit et propose une alternative.
 - Les tests passent avant chaque commit. Messages de commit au format conventionnel (`feat:`, `fix:`, `chore:`…).
 - Code, commentaires et README en anglais. Échanges avec Youssef en français. L'agent répond en français.
 - Youssef est sous **Windows + Git Bash** : donne des commandes bash, et garde les fins de ligne LF (`.gitattributes` est en place).
@@ -85,5 +88,5 @@ Si on déborde : on consomme la marge, puis on réduit l'évaluation de la v1 à
 | --- | --- | --- | --- |
 | IR des salariés | 40 | Numéro d'article du CGI 2026 | Article attendu dans les 5 premiers passages ; fidélité RAGAS |
 | CNSS / AMO | 15 | Passage de la source cnss.ma | Bonne source ; chiffre exact |
-| Calcul brut vers net | 30 | Net du bulletin réel | Outil appelé ; écart ≤ 1 DH |
+| Calcul brut vers net | 30 | Exemples chiffrés de la DGI (`data/processed/dgi_examples.json`, notes circulaires 733 et 736, testés dans `tests/test_official_examples.py`), puis bulletins réels | Outil appelé ; écart ≤ 1 DH |
 | Hors périmètre | 15 | Refus + renvoi vers la source officielle | Taux de refus correct |
