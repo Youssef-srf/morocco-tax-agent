@@ -1,7 +1,7 @@
 [project]
 name = "morocco-tax-agent"
 version = "0.1.0"
-description = "Add your description here"
+description = "Moroccan tax assistant: answers employee income-tax questions citing the exact CGI article, and computes net salary with tested tools"
 readme = "README.md"
 authors = [
     { name = "Youssef Sarraf", email = "youssefsarraf38@gmail.com" }
@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [project.scripts]
-casa-immo-agent = "casa_immo_agent:main"
+morocco-tax-agent = "morocco_tax_agent:main"
 
 [build-system]
 requires = ["uv_build>=0.13.4,<0.14.0"]

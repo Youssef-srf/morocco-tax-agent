@@ -1,2 +1,2 @@
 def main() -> None:
-    print("Hello from casa-immo-agent!")
+    print("Hello from morocco-tax-agent!")
