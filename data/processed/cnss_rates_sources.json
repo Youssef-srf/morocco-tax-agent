@@ -1,0 +1,37 @@
+{
+  "retrieved_on": "2026-10-20",
+  "note": "Verbatim excerpts of official cnss.ma pages, used by tests/test_rates.py. The rates table is no longer on the live page: it is taken from the Wayback Machine capture of 2025-03-25. Arrêté n° 1314.25 (BO n° 7443, 29 September 2025) changes the contribution base, not these rates or the 6,000 MAD ceiling.",
+  "rates_table": {
+    "url": "https://web.archive.org/web/20250325185811/https://cnss.ma/fr/content/paiement-de-vos-cotisations-sociales",
+    "columns": ["Catégorie de prestation", "Base de calcul", "Taux Charge patronale", "Taux Charge Salariale", "Taux Global"],
+    "rows": [
+      ["1- Prestations Familiales", "Le total des salaires réels de la période (mois/trimestre)", "6,40%", "--", "6,40%"],
+      ["2- Prestations sociales à court terme*", "Le total des salaires plafonnés (chacun plafonné à 6000 dhs)", "1,05%", "0,52%", "1,57%"],
+      ["3- Prestations sociales à long terme", "Le total des salaires plafonnés (chacun plafonné à 6000 dhs)", "7,93%", "3,96%", "11,89%"],
+      ["4- Assurance Maladie Obligatoire", "Le total des salaires réels de la période (mois/trimestre)", "4,11%", "2,26%", "6,37%"],
+      ["5- Taxe de formation professionnelle", "Le total des salaires réels de la période (mois/trimestre)", "1,6 %", "--", "1,6 %"]
+    ],
+    "footnote": "* Dont 0,57% relatif à l'Indemnité pour perte d'emploi réparti comme suit : la charge patronale est de 0,38% et la charge salariale est de 0,19%."
+  },
+  "live_pages": [
+    {
+      "url": "https://www.cnss.ma/fr/employeur/affilie/demarches-et-procedures/paiement-des-cotisations",
+      "excerpt": "Le taux global inclut notamment une part relative à l’Indemnité pour perte d’emploi (IPE) fixée à 0,57 %, répartie entre l’employeur (0,38 %) et le salarié (0,19 %)."
+    },
+    {
+      "url": "https://www.cnss.ma/fr/faq",
+      "question": "Quel est le taux de cotisation de l'AMO pour les salariés ?",
+      "excerpt": "Pour les affiliés relevant de l’assurance maladie obligatoire gérée par la CNSS : •2,26% à la charge des salariés. •2,26% à la charge des employeurs."
+    },
+    {
+      "url": "https://www.cnss.ma/fr/faq",
+      "question": "Quelles sont les bases de cotisation au titre de l’AMO ?",
+      "excerpt": "La cotisation due est assise, pour les salariés, sur l’ensemble des rémunérations (sans plafond)."
+    },
+    {
+      "url": "https://www.cnss.ma/fr/faq",
+      "question": "Quel est le salaire plafonné sur lequel la CNSS se base pour calculer le montant de la retraite ?",
+      "excerpt": "6000 DHS à compter d'avril 2002"
+    }
+  ]
+}

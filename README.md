@@ -35,7 +35,7 @@ question ──► LangGraph agent (Gemini) ──► search_tax_code ───�
 Official texts only (law 2-00, art. 8, excludes official legislative texts from copyright). Versions and SHA-256 in `data/raw/manifest.json`.
 
 - CGI 2026 (tax.gov.ma), income-tax title: articles 21 to 86, PDF pages 57 to 142.
-- CNSS/AMO employee rates: **not loaded yet** (see Limitations).
+- CNSS/AMO employee rates (0.52% + 3.96% up to 6,000 MAD/month, AMO 2.26% uncapped): cnss.ma rates table and FAQ, verbatim excerpts in `data/processed/cnss_rates_sources.json`. Arrêté 1314.25 (Bulletin officiel n° 7443, 29 Sept 2025) excludes some allowances from the contribution base; it does not change these rates.
 
 ## Run locally
 
@@ -67,6 +67,7 @@ Without `DATABASE_URL`, the agent embeds the articles in memory at startup.
 `eval/cases.jsonl` holds the cases, `eval/run.py` scores them (retrieval hit@5 for income tax, refusal for out-of-scope questions, ±1 MAD against real payslips for the calculator). The expected answers are filled by hand from the official texts and real payslips, never by the model.
 
 ## Limitations
-- CNSS/AMO employee rates are not in `rates/2026.yaml` yet: the official image on cnss.ma has no figures. The calculator refuses to run until they are added from an official document.
-- Tax-exempt allowances (art. 57), benefits in kind and the professions of art. 59-I-B/C are not handled by the calculator.
+- The CNSS rates table comes from the March 2025 capture of cnss.ma: the live site no longer publishes it.
+- Exempt allowances (arrêté 1314.25 for CNSS, CGI art. 57 for income tax) are not computed from rules: pass the payslip's "brut cotisable" and "brut imposable" as `contributable_gross` and `taxable_gross`.
+- Benefits in kind and the professions of art. 59-I-B/C are not handled by the calculator.
 - Labor Code and self-employed status: planned for v2.

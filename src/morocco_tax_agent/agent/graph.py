@@ -59,11 +59,21 @@ def make_tools(retriever: Retriever) -> list[BaseTool]:
         )
 
     @tool("compute_net_salary")
-    def compute_net_salary_tool(gross_monthly: float, dependents: int = 0) -> str:
+    def compute_net_salary_tool(
+        gross_monthly: float,
+        dependents: int = 0,
+        contributable_gross: float | None = None,
+        taxable_gross: float | None = None,
+    ) -> str:
         """Calcule le salaire net mensuel d'un salarié à partir du brut mensuel (en dirhams) et du
-        nombre de personnes à charge (conjoint et enfants, article 74). Renvoie le détail en JSON."""
+        nombre de personnes à charge (conjoint et enfants, article 74). Si l'utilisateur donne le
+        brut cotisable CNSS ou le brut imposable de son bulletin (plus bas que le brut à cause
+        d'indemnités exonérées), passe-les ; sinon laisse-les vides. Renvoie le détail en JSON."""
         try:
-            breakdown = compute_net_salary(gross_monthly, dependents)
+            breakdown = compute_net_salary(
+                gross_monthly, dependents,
+                contributable_gross=contributable_gross, taxable_gross=taxable_gross,
+            )
         except (MissingRatesError, ValueError) as error:
             return f"ERREUR : {error}"
         return json.dumps(breakdown.model_dump(mode="json"), ensure_ascii=False)

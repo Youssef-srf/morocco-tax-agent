@@ -36,7 +36,11 @@ def main() -> None:
             graph = graph or default_graph(retriever)
             ok = any(link in ask(graph, case["question"]) for link in OFFICIAL_LINKS)
         elif block == "salary" and case.get("expected_net") is not None:
-            net = compute_net_salary(case["gross_monthly"], case.get("dependents", 0)).net_monthly
+            net = compute_net_salary(
+                case["gross_monthly"], case.get("dependents", 0),
+                contributable_gross=case.get("contributable_gross"),
+                taxable_gross=case.get("taxable_gross"),
+            ).net_monthly
             ok = abs(net - Decimal(str(case["expected_net"]))) <= 1
         else:
             continue

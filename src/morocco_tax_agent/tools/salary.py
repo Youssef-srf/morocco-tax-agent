@@ -3,14 +3,22 @@
 The LLM never computes: the agent calls this function and quotes its result.
 
 Steps (CGI 2026):
-  1. employee social contributions (CNSS, AMO), deductible under article 59-II/III;
-  2. professional expenses, flat rate of article 59-I-A, on the annual gross;
+  1. employee social contributions (CNSS, AMO) on the contribution base,
+     deductible under article 59-II/III;
+  2. professional expenses, flat rate of article 59-I-A, on the annual taxable gross;
   3. income tax: scale of article 73-I on the annual net taxable income;
   4. family reduction of article 74, deducted from the annual tax;
   5. the annual tax is withheld in twelve equal monthly amounts.
 
-Out of scope for v1: tax-exempt allowances (article 57), benefits in kind,
-the professions of article 59-I-B/C, pensions (article 60).
+Some allowances (transport, meal...) are paid in full but partly excluded
+from the CNSS base (arrêté 1314.25) and from the taxable income (CGI
+article 57), with different ceilings. Rather than coding those rules, the
+calculator takes the two bases printed on the payslip: `contributable_gross`
+("brut cotisable") and `taxable_gross` ("brut imposable"). Both default to
+the gross, i.e. a salary without exempt allowances.
+
+Out of scope for v1: benefits in kind, the professions of article 59-I-B/C,
+pensions (article 60).
 """
 
 from __future__ import annotations
@@ -32,6 +40,8 @@ class MissingRatesError(RuntimeError):
 class SalaryBreakdown(BaseModel):
     year: int
     gross_monthly: Decimal
+    contributable_gross: Decimal  # monthly base of CNSS/AMO
+    taxable_gross: Decimal  # monthly base of income tax
     dependents: int
     contributions: dict[str, Decimal]  # monthly, by name
     professional_expenses: Decimal  # monthly
@@ -68,16 +78,27 @@ def professional_expenses(annual_gross: Decimal, rates: IncomeTaxRates) -> Decim
     return min(annual_gross * pe.percent_above_threshold / 100, pe.cap)
 
 
+def _base(value: Decimal | float | str | None, gross: Decimal, name: str) -> Decimal:
+    base = gross if value is None else Decimal(str(value))
+    if not 0 <= base <= gross:
+        raise ValueError(f"{name} must be between 0 and gross_monthly")
+    return base
+
+
 def compute_net_salary(
     gross_monthly: Decimal | float | str,
     dependents: int = 0,
     year: int = 2026,
     rates: Rates | None = None,
     social: SocialRates | None = None,
+    contributable_gross: Decimal | float | str | None = None,
+    taxable_gross: Decimal | float | str | None = None,
 ) -> SalaryBreakdown:
     """Net monthly salary of an employee paid `gross_monthly` dirhams.
 
     `dependents`: spouse and children counting for the family reduction (article 74).
+    `contributable_gross`, `taxable_gross`: the "brut cotisable" and "brut
+    imposable" of the payslip, when exempt allowances make them lower than the gross.
     `social` overrides the CNSS/AMO rates of the year (used by the tests).
     """
     gross = Decimal(str(gross_monthly))
@@ -85,6 +106,8 @@ def compute_net_salary(
         raise ValueError("gross_monthly must be positive")
     if dependents < 0:
         raise ValueError("dependents must be zero or more")
+    contributable = _base(contributable_gross, gross, "contributable_gross")
+    taxable = _base(taxable_gross, gross, "taxable_gross")
 
     rates = rates or load_rates(year)
     social = social or rates.social
@@ -95,13 +118,15 @@ def compute_net_salary(
     it = rates.income_tax
 
     contributions = {
-        c.name: _round(min(gross, c.monthly_cap or gross) * c.percent / 100)
+        c.name: _round(min(contributable, c.monthly_cap or contributable) * c.percent / 100)
         for c in social.contributions
     }
-    annual_gross = gross * MONTHS
+    annual_taxable_gross = taxable * MONTHS
     annual_contributions = sum(contributions.values(), Decimal(0)) * MONTHS
-    annual_expenses = professional_expenses(annual_gross, it)
-    annual_taxable = max(annual_gross - annual_expenses - annual_contributions, Decimal(0))
+    annual_expenses = professional_expenses(annual_taxable_gross, it)
+    annual_taxable = max(
+        annual_taxable_gross - annual_expenses - annual_contributions, Decimal(0)
+    )
 
     tax_before = scale_tax(annual_taxable, it.brackets)
     fr = it.family_reduction
@@ -111,6 +136,8 @@ def compute_net_salary(
     return SalaryBreakdown(
         year=rates.year,
         gross_monthly=_round(gross),
+        contributable_gross=_round(contributable),
+        taxable_gross=_round(taxable),
         dependents=dependents,
         contributions=contributions,
         professional_expenses=_round(annual_expenses / MONTHS),

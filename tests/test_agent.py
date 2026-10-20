@@ -50,23 +50,27 @@ def test_disclaimer_is_not_duplicated(retriever):
     assert messages[-1].text.count(DISCLAIMER) == 1
 
 
-def test_salary_tool_reports_missing_rates_instead_of_guessing(retriever):
-    tools = {t.name: t for t in make_tools(retriever)}
-    output = tools["compute_net_salary"].invoke({"gross_monthly": 10000, "dependents": 2})
-    assert output.startswith("ERREUR : CNSS/AMO rates for 2026 are not loaded yet")
+@pytest.fixture(scope="module")
+def salary_tool(retriever):
+    return next(t for t in make_tools(retriever) if t.name == "compute_net_salary")
 
 
-def test_salary_tool_returns_the_breakdown(retriever, monkeypatch):
-    from morocco_tax_agent.agent import graph
-    from morocco_tax_agent.rates import Contribution, SocialRates
-    from morocco_tax_agent.tools import salary
+def test_salary_tool_returns_the_breakdown(salary_tool):
+    output = json.loads(salary_tool.invoke({"gross_monthly": 10000, "dependents": 2}))
+    assert output["net_monthly"] == "9003.64"  # hand-checked in tests/test_salary.py
+    assert output["articles"] == ["Article 59", "Article 73", "Article 74"]
 
-    synthetic = SocialRates(source="synthetic", contributions=[Contribution(name="A", percent=4)])
-    monkeypatch.setattr(graph, "compute_net_salary",
-                        lambda g, d: salary.compute_net_salary(g, d, social=synthetic))
-    tools = {t.name: t for t in make_tools(retriever)}
-    output = json.loads(tools["compute_net_salary"].invoke({"gross_monthly": 10000}))
-    assert output["net_monthly"] and output["articles"] == ["Article 59", "Article 73", "Article 74"]
+
+def test_salary_tool_passes_the_payslip_bases(salary_tool):
+    output = json.loads(salary_tool.invoke(
+        {"gross_monthly": 10500, "contributable_gross": 10000, "taxable_gross": 10000}
+    ))
+    assert output["net_monthly"] == "9403.64"
+
+
+def test_salary_tool_reports_errors_instead_of_guessing(salary_tool):
+    output = salary_tool.invoke({"gross_monthly": 10000, "contributable_gross": 12000})
+    assert output == "ERREUR : contributable_gross must be between 0 and gross_monthly"
 
 
 def test_ask_returns_the_final_text(retriever):

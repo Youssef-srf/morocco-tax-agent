@@ -81,6 +81,42 @@ def test_family_reduction_was_set_by_finance_law_2026():
     assert any("50-25" in note and "2026" in note for note in a74["amendments"])
 
 
+CNSS_SOURCES = Path("data/processed/cnss_rates_sources.json")
+
+
+@pytest.fixture(scope="module")
+def cnss() -> dict:
+    return json.loads(CNSS_SOURCES.read_text(encoding="utf-8"))
+
+
+def fr_pct(value: Decimal) -> str:
+    """Decimal('0.52') -> '0,52%', as printed on cnss.ma."""
+    return f"{value.normalize():f}".replace(".", ",") + "%"
+
+
+@pytest.mark.parametrize("name, row_label", [
+    ("CNSS court terme", "2- Prestations sociales à court terme*"),
+    ("CNSS long terme", "3- Prestations sociales à long terme"),
+    ("AMO", "4- Assurance Maladie Obligatoire"),
+])
+def test_social_contributions_match_cnss_table(cnss, name, row_label):
+    contribution = next(c for c in load_rates(2026).social.contributions if c.name == name)
+    row = next(r for r in cnss["rates_table"]["rows"] if r[0] == row_label)
+    _, base, _, employee, _ = row
+    assert employee == fr_pct(contribution.percent)
+    if contribution.monthly_cap is None:
+        assert base.startswith("Le total des salaires réels")
+    else:
+        assert f"plafonné à {int(contribution.monthly_cap)} dhs" in base
+
+
+def test_amo_has_no_ceiling_and_cap_dates_from_2002(cnss):
+    excerpts = " ".join(page["excerpt"] for page in cnss["live_pages"])
+    assert "2,26% à la charge des salariés" in excerpts
+    assert "sur l’ensemble des rémunérations (sans plafond)" in excerpts
+    assert "6000 DHS à compter d'avril 2002" in excerpts
+
+
 def test_unknown_year_is_refused():
     with pytest.raises(ValueError, match="No rates for 1999"):
         load_rates(1999)

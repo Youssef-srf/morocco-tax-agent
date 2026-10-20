@@ -38,11 +38,22 @@ def test_ask_rejects_empty_question(scripted_graph):
     assert client.post("/ask", json={"question": ""}).status_code == 422
 
 
-def test_net_salary_is_unavailable_until_official_rates_are_loaded():
-    response = client.post("/net-salary", json={"gross_monthly": 10000, "dependents": 1})
-    assert response.status_code == 503
-    assert "CNSS/AMO rates for 2026" in response.json()["detail"]
+def test_net_salary():
+    response = client.post("/net-salary", json={"gross_monthly": 10000, "dependents": 2})
+    assert response.status_code == 200
+    assert response.json()["net_monthly"] == "9003.64"
 
 
-def test_net_salary_validates_input():
-    assert client.post("/net-salary", json={"gross_monthly": -5}).status_code == 422
+def test_net_salary_with_payslip_bases():
+    response = client.post("/net-salary", json={
+        "gross_monthly": 10500, "contributable_gross": 10000, "taxable_gross": 10000,
+    })
+    assert response.json()["net_monthly"] == "9403.64"
+
+
+@pytest.mark.parametrize("body", [
+    {"gross_monthly": -5},
+    {"gross_monthly": 10000, "taxable_gross": 12000},
+])
+def test_net_salary_validates_input(body):
+    assert client.post("/net-salary", json=body).status_code == 422

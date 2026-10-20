@@ -26,10 +26,16 @@ with st.sidebar:
     st.header("Calculateur brut → net")
     gross = st.number_input("Salaire brut mensuel (DH)", min_value=0.0, value=10000.0, step=500.0)
     dependents = st.number_input("Personnes à charge", min_value=0, max_value=10, value=0)
+    with st.expander("Indemnités exonérées (bulletin)"):
+        contributable = st.number_input("Brut cotisable CNSS (DH, 0 = brut)", min_value=0.0, value=0.0)
+        taxable = st.number_input("Brut imposable (DH, 0 = brut)", min_value=0.0, value=0.0)
     if st.button("Calculer") and gross > 0:
         try:
-            r = compute_net_salary(gross, int(dependents))
-        except MissingRatesError as error:
+            r = compute_net_salary(
+                gross, int(dependents),
+                contributable_gross=contributable or None, taxable_gross=taxable or None,
+            )
+        except (MissingRatesError, ValueError) as error:
             st.error(str(error))
         else:
             st.metric("Net mensuel", f"{r.net_monthly:,.2f} DH")

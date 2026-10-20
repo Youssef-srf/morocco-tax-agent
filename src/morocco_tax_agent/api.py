@@ -30,6 +30,8 @@ class Answer(BaseModel):
 class SalaryRequest(BaseModel):
     gross_monthly: float = Field(gt=0)
     dependents: int = Field(default=0, ge=0)
+    contributable_gross: float | None = Field(default=None, ge=0)  # "brut cotisable"
+    taxable_gross: float | None = Field(default=None, ge=0)  # "brut imposable"
 
 
 @lru_cache(maxsize=1)
@@ -50,6 +52,11 @@ def ask_question(body: Question, graph=Depends(get_graph)) -> Answer:
 @app.post("/net-salary")
 def net_salary(body: SalaryRequest) -> SalaryBreakdown:
     try:
-        return compute_net_salary(body.gross_monthly, body.dependents)
+        return compute_net_salary(
+            body.gross_monthly, body.dependents,
+            contributable_gross=body.contributable_gross, taxable_gross=body.taxable_gross,
+        )
     except MissingRatesError as error:
         raise HTTPException(status_code=503, detail=str(error)) from error
+    except ValueError as error:
+        raise HTTPException(status_code=422, detail=str(error)) from error
