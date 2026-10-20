@@ -1,6 +1,8 @@
 # Local PostgreSQL + pgvector, for development and the database tests:
 #   docker compose up -d db
-#   TEST_DATABASE_URL=postgresql://tax:tax@localhost:5432/morocco_tax uv run pytest -q
+#   docker compose exec db psql -U tax -d morocco_tax -c "CREATE DATABASE morocco_tax_test"
+#   uv run --env-file .env pytest -q   # TEST_DATABASE_URL points to morocco_tax_test
+# The test database is separate so the tests never overwrite the real index.
 services:
   db:
     image: pgvector/pgvector:pg17
