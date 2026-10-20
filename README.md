@@ -1,19 +1,21 @@
-# casa-immo-agent
+# morocco-tax-agent
 
-> An AI agent that answers questions about the Casablanca real-estate market by choosing the right tool: SQL over property listings, RAG over official documents, or a price model. Every answer cites its sources.
+> An AI assistant for Moroccan tax and labor questions: it answers from the official texts (General Tax Code, Labor Code, CNSS rates), cites the exact article, and computes net salary and income tax with tested tools.
 
-**Status:** work in progress, week 1/4 (data pipeline)
+**Status:** work in progress — v1 (income tax for employees + CNSS/AMO) due Nov 2, 2026
 
 ## What it does
-- *"What's the median price per m² for an apartment in Maarif?"* → SQL on listings
-- *"What fees should I expect when buying an apartment?"* → RAG on official documents, with citations
-- *"How much is a 90 m² flat with parking in Bourgogne worth?"* → price model, with a range
+- *"Which tax rate applies to a net taxable income of 200,000 MAD per year?"* → search in the 2026 General Tax Code, with the article cited
+- *"Does the 6,000 MAD ceiling apply to AMO?"* → answer from the official CNSS rates
+- *"Gross 12,000 MAD, married, 2 children: what is my net salary?"* → tested calculator, with the CNSS, AMO and income tax breakdown
+
+Every answer ends with: *General information, not tax or legal advice.*
 
 ## Stack
-Gemini · LangGraph · PostgreSQL + pgvector · FastAPI · Docker · GCP Cloud Run
+Gemini · LangGraph · PostgreSQL + pgvector · FastAPI · Streamlit · Docker · GCP Cloud Run
 
-## Data
-<!-- step 2: sources, what was respected (robots.txt, ToS, no personal data) -->
+## Sources
+<!-- official texts only: versions, SHA-256 in data/raw/manifest.json, legal basis (law 2-00, art. 8) -->
 
 ## Run locally
 uv sync
