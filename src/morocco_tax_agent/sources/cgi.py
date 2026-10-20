@@ -257,7 +257,7 @@ def main() -> None:
 
     sha256 = hashlib.sha256(args.pdf.read_bytes()).hexdigest()
     out.parent.mkdir(parents=True, exist_ok=True)
-    with out.open("w", encoding="utf-8") as f:
+    with out.open("w", encoding="utf-8", newline="\n") as f:
         for article in articles:
             record = article.model_dump() | {"source_sha256": sha256}
             f.write(json.dumps(record, ensure_ascii=False) + "\n")
