@@ -6,7 +6,8 @@
 __pycache__/
 *.pyc
 
-# Données : régénérées par les scripts, jamais versionnées
+# Sources brutes : jamais versionnées (seul le manifest l'est).
+# data/processed/ est versionné : le PDF du CGI ne se télécharge pas en CI.
 data/raw/*
 !data/raw/manifest.json
 
