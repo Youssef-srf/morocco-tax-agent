@@ -1,11 +1,19 @@
 """Run the evaluation cases and print one score per metric.
 
-    uv run --env-file .env python eval/run.py                    # everything
+    uv run --env-file .env python eval/run.py                    # next batch
+    uv run --env-file .env python eval/run.py --max-new 10       # bigger batch
     uv run --env-file .env python eval/run.py --retrieval-only   # no generation quota used
 
 Only cases whose expected value is filled are run. Ground truth is checkable
 without trusting its author: tests/test_eval_cases.py checks every evidence
 quote against the official text.
+
+The free Gemini tier allows few requests per day, so agent answers are cached
+in eval/cache.jsonl, keyed by model + system prompt + question: a question
+already asked costs no quota, and changing the model or the prompt invalidates
+it. Each run asks the agent at most --max-new uncached questions (each uses 2
+or 3 requests); run it again the next day to continue. On a per-minute limit
+it waits and retries; on the daily limit it stops and keeps what it has.
 
 - ir / retrieval@5: the expected article among the first 5 passages.
 - ir / cited: the agent's answer cites the expected article ("article 74").
@@ -17,20 +25,68 @@ Detailed results are written to eval/results/<date>.json.
 """
 
 import argparse
+import hashlib
 import json
 import re
+import time
 from datetime import date
 from decimal import Decimal
 from pathlib import Path
 
 from langchain_core.messages import AIMessage, HumanMessage
 
-from morocco_tax_agent.agent.graph import default_graph, default_retriever
+from morocco_tax_agent.agent.graph import (
+    GEMINI_MODEL, SYSTEM_PROMPT, default_graph, default_retriever,
+)
 from morocco_tax_agent.tools.salary import compute_net_salary
 
 CASES = Path(__file__).parent / "cases.jsonl"
+CACHE = Path(__file__).parent / "cache.jsonl"
 RESULTS = Path(__file__).parent / "results"
 OFFICIAL_LINKS = ("tax.gov.ma", "cnss.ma")
+
+
+class DailyQuotaExhausted(Exception):
+    pass
+
+
+class AnswerCache:
+    """Agent answers on disk, one JSON line each, keyed by model + system prompt + question."""
+
+    def __init__(self, path: Path, model: str, prompt: str) -> None:
+        self.path, self.model = path, model
+        self.prompt_hash = hashlib.sha256(prompt.encode()).hexdigest()[:12]
+        lines = path.read_text(encoding="utf-8").splitlines() if path.exists() else []
+        self.entries = {e["key"]: e for e in map(json.loads, lines)}
+
+    def key(self, question: str) -> str:
+        return hashlib.sha256(f"{self.model}\n{self.prompt_hash}\n{question}".encode()).hexdigest()
+
+    def get(self, question: str) -> dict | None:
+        return self.entries.get(self.key(question))
+
+    def put(self, question: str, answer: str, tools: list[str]) -> None:
+        entry = {"key": self.key(question), "model": self.model, "prompt": self.prompt_hash,
+                 "question": question, "answer": answer, "tools": tools,
+                 "date": date.today().isoformat()}
+        self.entries[entry["key"]] = entry
+        with self.path.open("a", encoding="utf-8", newline="\n") as f:
+            f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+
+
+def ask_with_retry(graph, question: str, retries: int = 3) -> tuple[str, list[str]]:
+    """Wait out per-minute limits; raise DailyQuotaExhausted on the daily one."""
+    for attempt in range(retries + 1):
+        try:
+            return run_agent(graph, question)
+        except Exception as error:  # the Gemini client raises its own rate-limit classes
+            message = str(error)
+            if "RESOURCE_EXHAUSTED" not in message:
+                raise
+            if "PerDay" in message or attempt == retries:
+                raise DailyQuotaExhausted(message[:300]) from error
+            delay = re.search(r"retry in ([\d.]+)s", message)
+            time.sleep(float(delay.group(1)) + 1 if delay else 60)
 
 
 def run_agent(graph, question: str) -> tuple[str, list[str]]:
@@ -48,31 +104,39 @@ def cites(answer: str, label: str) -> bool:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--retrieval-only", action="store_true", help="skip the agent (no LLM calls)")
+    parser.add_argument("--max-new", type=int, default=6,
+                        help="max uncached questions asked to the agent in this run")
     args = parser.parse_args()
 
     cases = [json.loads(line) for line in CASES.read_text(encoding="utf-8").splitlines()]
     retriever = default_retriever()
     graph = default_graph(retriever)
-    agent_enabled = not args.retrieval_only
+    cache = AnswerCache(CACHE, GEMINI_MODEL, SYSTEM_PROMPT)
+    budget = 0 if args.retrieval_only else args.max_new
     scores: dict[str, list[bool]] = {}
     details = []
     skipped: list[str] = []
+    asked = 0
 
     def agent(case: dict) -> tuple[str, list[str]] | None:
-        """Run the agent, or None once the LLM quota is exhausted (counted as skipped, not failed)."""
-        nonlocal agent_enabled
-        if not agent_enabled:
+        """Cached answer, or a new one within the batch budget; None if neither (skipped, not failed)."""
+        nonlocal budget, asked
+        if (hit := cache.get(case["question"])) is not None:
+            return hit["answer"], hit["tools"]
+        if budget <= 0:
             skipped.append(case["id"])
             return None
         try:
-            return run_agent(graph, case["question"])
-        except Exception as error:  # the Gemini client raises its own rate-limit class
-            if "RESOURCE_EXHAUSTED" not in str(error):
-                raise
-            print(f"LLM quota exhausted at {case['id']}: agent metrics stop here")
-            agent_enabled = False
+            answer, tools = ask_with_retry(graph, case["question"])
+        except DailyQuotaExhausted:
+            print(f"Daily Gemini quota exhausted at {case['id']}: the rest waits for the next run")
+            budget = 0
             skipped.append(case["id"])
             return None
+        budget -= 1
+        asked += 1
+        cache.put(case["question"], answer, tools)
+        return answer, tools
 
     def record(metric: str, case: dict, ok: bool, **extra) -> None:
         scores.setdefault(metric, []).append(ok)
@@ -113,12 +177,15 @@ def main() -> None:
         print(f"{metric:24} {sum(results)}/{len(results)} ({sum(results) / len(results):.0%})")
     if not scores:
         print("No case has an expected value yet.")
+    print(f"\nModel {GEMINI_MODEL}: {asked} new agent answers in this run, "
+          f"{len(cache.entries)} in the cache.")
     if skipped:
-        print(f"Agent not run on {len(skipped)} cases: {', '.join(skipped)}")
+        print(f"Agent not run yet on {len(skipped)} cases (next run): {', '.join(skipped)}")
 
     RESULTS.mkdir(exist_ok=True)
     out = RESULTS / f"{date.today().isoformat()}.json"
-    out.write_text(json.dumps({"summary": summary, "skipped_agent": skipped, "details": details},
+    out.write_text(json.dumps({"model": GEMINI_MODEL, "summary": summary,
+                               "skipped_agent": skipped, "details": details},
                               ensure_ascii=False, indent=2),
                    encoding="utf-8", newline="\n")
     print(f"\nDetails written to {out}")

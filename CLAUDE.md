@@ -15,7 +15,7 @@ Fiche projet (plan détaillé, sources, évaluation) : https://claude.ai/code/ar
 
 ## Stack
 
-Python 3.12, `uv` · Gemini (API Gemini, puis Vertex AI) · LangGraph · PostgreSQL + pgvector (Supabase ou Neon) · FastAPI · Streamlit · Docker · GCP Cloud Run · pytest · Pydantic.
+Python 3.12, `uv` · Gemini (API Gemini, offre gratuite) · LangGraph · PostgreSQL + pgvector (Neon, offre gratuite) · FastAPI · Streamlit · Docker · Hugging Face Spaces (Docker, offre gratuite) · pytest · Pydantic. Le Dockerfile reste compatible Cloud Run (port lu dans `$PORT`), sans y déployer.
 
 ## Commandes
 
@@ -59,7 +59,8 @@ Youssef doit pouvoir les défendre en entretien. Garde-les, ou propose explicite
 - Les tests passent avant chaque commit. Messages de commit au format conventionnel (`feat:`, `fix:`, `chore:`…).
 - Code, commentaires et README en anglais. Échanges avec Youssef en français. L'agent répond en français.
 - Youssef est sous **Windows + Git Bash** : donne des commandes bash, et garde les fins de ligne LF (`.gitattributes` est en place).
-- Demande avant toute action qui coûte de l'argent ou qui est difficile à annuler (déploiement GCP, création de ressources cloud, `git push --force`).
+- **Règle absolue : aucune dépense.** N'active jamais la facturation (Gemini, GCP ou autre) et ne crée aucune ressource payante, même « quelques centimes ». Seules les offres gratuites sont permises (Gemini gratuit, Neon gratuit, Hugging Face Spaces CPU gratuit). Si une tâche demande un service payant, arrête-toi et propose une alternative gratuite.
+- Demande avant toute action difficile à annuler (`git push --force`, suppression de données hébergées).
 
 ## Façon de travailler avec Youssef
 
@@ -77,7 +78,7 @@ Youssef doit pouvoir les défendre en entretien. Garde-les, ou propose explicite
 | 24–26 oct | Calculateur brut vers net | `compute_net_salary`, 30 cas réels à 1 DH près | Code et tests faits (taux officiels, brut cotisable et brut imposable optionnels) ; manquent les 30 bulletins réels |
 | 27–29 oct | Indexation pgvector, agent LangGraph (`search_tax_code`, `compute_net_salary`), avertissement, refus hors périmètre | Streamlit en local, 30 premiers cas d'évaluation | Code et tests hors ligne faits ; jamais lancé contre Gemini ni Postgres ; 30 questions proposées, vérité terrain à remplir |
 | 30 oct | Marge | — | — |
-| 31 oct – 2 nov | FastAPI, Docker, Cloud Run, README | **v1 en ligne** | FastAPI, Dockerfile, README faits ; image jamais construite ; Cloud Run à faire |
+| 31 oct – 2 nov | FastAPI, Docker, Hugging Face Spaces + Neon, README | **v1 en ligne** | FastAPI, Dockerfile (testé en local), limite par IP sur `/ask`, README faits ; Space et base Neon à créer par Youssef (comptes gratuits) |
 | 3–9 nov | 100 cas d'évaluation + RAGAS, barèmes 2025 vs 2026, CI GitHub Actions, vidéo de 2 min | Chiffres dans le README, **candidature Cnexia (limite 10 nov)** | À faire |
 
 Si on déborde : on consomme la marge, puis on réduit l'évaluation de la v1 à 30 cas. Le calculateur testé et la citation d'article ne se négocient pas.

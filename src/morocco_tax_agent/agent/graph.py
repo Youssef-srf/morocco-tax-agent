@@ -125,5 +125,7 @@ def default_retriever() -> Retriever:
 def default_graph(retriever: Retriever | None = None):
     from langchain_google_genai import ChatGoogleGenerativeAI
 
-    model = ChatGoogleGenerativeAI(model=GEMINI_MODEL, temperature=0)
+    # Few retries: on an exhausted free quota, fail fast with a clear message instead of
+    # retrying for minutes (the API and eval/run.py handle the error themselves).
+    model = ChatGoogleGenerativeAI(model=GEMINI_MODEL, temperature=0, max_retries=2)
     return build_graph(model, retriever or default_retriever())
