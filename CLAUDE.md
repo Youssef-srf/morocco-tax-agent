@@ -6,15 +6,6 @@ Projet personnel de Youssef (Master IA, FSBM). But : une démo en ligne pour can
 
 Fiche projet (plan détaillé, sources, évaluation) : https://claude.ai/code/artifact/121b24ed-b32b-46d4-8a6a-ebdcb35ff67c
 
-## Première session : à faire avant tout le reste
-
-1. **Relis tout le dépôt** : `README.md`, `pyproject.toml`, `.gitignore`, `.gitattributes`, `.env.example`, `scripts/`, `src/`, `tests/`, `data/raw/manifest.json` et quelques lignes de `data/processed/*.jsonl`. Lance `git log --oneline` et `git status`.
-2. **Lance les tests** : `uv sync`, puis `uv run pytest -q`. Les tests du découpeur ont besoin de `data/raw/cgi_2026_fr.pdf` ; ils sont ignorés s'il manque.
-3. **Termine le changement de nom.** Le projet s'appelait `casa-immo-agent` (agent immobilier, abandonné) : cherche toute trace restante (`casa`, `immo`, `immobilier`, `casa_immo`) dans le code, la config, le README et `.env.example`, et remplace-la. Le dépôt GitHub et le paquet Python s'appellent déjà `morocco-tax-agent` / `morocco_tax_agent`.
-4. Si `src/morocco_tax_agent/sources/cgi.py` ou `tests/test_cgi_parser.py` manquent, demande à Youssef : ils sont peut-être encore dans `~/Downloads`.
-5. **Résume en 10 lignes** ce que tu as compris : état du projet, ce qui marche, ce qui manque, la prochaine étape du plan. Attends la validation de Youssef.
-6. Une fois validé, supprime cette section « Première session » de ce fichier et commite.
-
 ## Périmètre de la v1 (en ligne le 2 novembre 2026)
 
 - **Inclus** : impôt sur le revenu des salariés (CGI 2026, Livre I, Titre II, articles 21 à 86 ; barème à l'article 73) ; cotisations CNSS/AMO ; calcul du salaire brut vers net.
