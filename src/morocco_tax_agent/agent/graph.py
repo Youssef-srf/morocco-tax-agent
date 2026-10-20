@@ -101,17 +101,19 @@ def ask(graph, question: str) -> str:
     return result["messages"][-1].text
 
 
-def default_graph():
-    """Gemini + pgvector when DATABASE_URL is set, else an in-memory index of the JSONL."""
-    from langchain_google_genai import ChatGoogleGenerativeAI
-
+def default_retriever() -> Retriever:
+    """pgvector when DATABASE_URL is set, else an in-memory index of the JSONL."""
     from morocco_tax_agent.index.chunks import load_chunks
     from morocco_tax_agent.index.store import GeminiEmbedder, InMemoryRetriever, PgVectorStore
 
     embedder = GeminiEmbedder()
     if os.environ.get("DATABASE_URL"):
-        retriever = PgVectorStore(os.environ["DATABASE_URL"], embedder)
-    else:
-        retriever = InMemoryRetriever(load_chunks(ARTICLES_JSONL), embedder)
+        return PgVectorStore(os.environ["DATABASE_URL"], embedder)
+    return InMemoryRetriever(load_chunks(ARTICLES_JSONL), embedder)
+
+
+def default_graph(retriever: Retriever | None = None):
+    from langchain_google_genai import ChatGoogleGenerativeAI
+
     model = ChatGoogleGenerativeAI(model=GEMINI_MODEL, temperature=0)
-    return build_graph(model, retriever)
+    return build_graph(model, retriever or default_retriever())

@@ -33,8 +33,8 @@ Base légale : la loi 2-00, article 8, exclut du droit d'auteur les textes offic
 | Fichier (`data/raw/`, ignoré par Git) | Source | État |
 | --- | --- | --- |
 | `cgi_2026_fr.pdf` | https://www.tax.gov.ma/wps/wcm/connect/08712531-1e81-4e28-a38b-2bd9edf8e09e/CGI+2026+FR.pdf?MOD=AJPERES. `curl` reçoit une page HTML anti-robot : il faut télécharger depuis un navigateur. | 775 pages, texte extractible, SHA-256 `28f85c69…3b03022`. Titre IR : pages PDF 57 à 142. |
-| `cnss_cotisations_2026.webp` | Image officielle des taux, cnss.ma (`/sites/default/files/2026-05/cotisations.webp`) | Les taux sont dans une **image**, pas en texte. Ils sont à extraire (Gemini vision → Pydantic) et à comparer à la transcription manuelle de Youssef. |
-| Communiqué CNSS « assiette de cotisations à compter du 1er octobre 2025 » | https://www.cnss.ma/fr/actualites/communiqu%C3%A9-relatif-%C3%A0-lassiette-de-cotisations-sociales-%C3%A0-compter-du-1er-octobre-2025 | Contenu en image, pas encore lu. Il peut modifier l'assiette ou le plafond : à vérifier avec Youssef avant d'écrire le calculateur. |
+| `cnss_cotisations_2026.webp` | Image officielle des taux, cnss.ma (`/sites/default/files/2026-05/cotisations.webp`) | **Vérifié le 20 oct : ce n'est pas le tableau des taux**, c'est l'illustration (sans chiffres) du communiqué ci-dessous. Aucune source officielle des taux CNSS/AMO n'est encore trouvée : `social: null` dans `rates/2026.yaml`, et le calculateur refuse de tourner. |
+| Communiqué CNSS « assiette de cotisations à compter du 1er octobre 2025 » | https://www.cnss.ma/fr/actualites/communiqu%C3%A9-relatif-%C3%A0-lassiette-de-cotisations-sociales-%C3%A0-compter-du-1er-octobre-2025 | La page ne contient que l'illustration ci-dessus et une bannière : pas de texte lisible. Il peut modifier l'assiette ou le plafond : trouver le texte (PDF, vidéo ?) avec Youssef. |
 | `code_travail_fr_2011.pdf` (v2) | adala.justice.gov.ma | Consolidé en 2011, issu d'un OCR ; articles 256, 327 et 334 non détectés ; ne contient pas la loi 02-21 (2021). |
 
 ## Décisions déjà prises (et pourquoi)
@@ -70,11 +70,11 @@ Youssef doit pouvoir les défendre en entretien. Garde-les, ou propose explicite
 | Dates | Étape | Livrable | État |
 | --- | --- | --- | --- |
 | 20–21 oct | Sources téléchargées et contrôlées, dépôt renommé, découpage du titre IR par article | `manifest.json`, `cgi_2026_ir_articles.jsonl` (74 articles, 21 → 86) | Fait |
-| 22–23 oct | Barème de l'article 73 et taux CNSS/AMO en Pydantic, comparés aux sources officielles | `rates/2026.yaml` + tests | À faire |
-| 24–26 oct | Calculateur brut vers net | `compute_net_salary`, 30 cas réels à 1 DH près | À faire |
-| 27–29 oct | Indexation pgvector, agent LangGraph (`search_tax_code`, `compute_net_salary`), avertissement, refus hors périmètre | Streamlit en local, 30 premiers cas d'évaluation | À faire |
+| 22–23 oct | Barème de l'article 73 et taux CNSS/AMO en Pydantic, comparés aux sources officielles | `rates/2026.yaml` + tests | IR fait (art. 59, 73, 74) ; CNSS/AMO bloqué (pas de source officielle) |
+| 24–26 oct | Calculateur brut vers net | `compute_net_salary`, 30 cas réels à 1 DH près | Code et tests (taux sociaux synthétiques) faits ; manquent les taux officiels et les 30 bulletins |
+| 27–29 oct | Indexation pgvector, agent LangGraph (`search_tax_code`, `compute_net_salary`), avertissement, refus hors périmètre | Streamlit en local, 30 premiers cas d'évaluation | Code et tests hors ligne faits ; jamais lancé contre Gemini ni Postgres ; 30 questions proposées, vérité terrain à remplir |
 | 30 oct | Marge | — | — |
-| 31 oct – 2 nov | FastAPI, Docker, Cloud Run, README | **v1 en ligne** | À faire |
+| 31 oct – 2 nov | FastAPI, Docker, Cloud Run, README | **v1 en ligne** | FastAPI, Dockerfile, README faits ; image jamais construite ; Cloud Run à faire |
 | 3–9 nov | 100 cas d'évaluation + RAGAS, barèmes 2025 vs 2026, CI GitHub Actions, vidéo de 2 min | Chiffres dans le README, **candidature Cnexia (limite 10 nov)** | À faire |
 
 Si on déborde : on consomme la marge, puis on réduit l'évaluation de la v1 à 30 cas. Le calculateur testé et la citation d'article ne se négocient pas.
