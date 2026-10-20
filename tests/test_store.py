@@ -4,35 +4,16 @@ The PostgreSQL test runs only when TEST_DATABASE_URL points to a database
 with the pgvector extension (for example: docker compose up db).
 """
 
-import hashlib
 import os
-import re
 from pathlib import Path
 
 import pytest
+from fakes import BagOfWords
 
 from morocco_tax_agent.index.chunks import load_chunks
 from morocco_tax_agent.index.store import InMemoryRetriever, PgVectorStore, mentioned_articles
 
 ARTICLES = Path("data/processed/cgi_2026_ir_articles.jsonl")
-
-
-class BagOfWords:
-    """Deterministic stand-in for an embedding model: hashed word counts."""
-
-    dim = 768
-
-    def _vector(self, text: str) -> list[float]:
-        v = [0.0] * self.dim
-        for word in re.findall(r"\w{4,}", text.lower()):
-            v[int(hashlib.md5(word.encode()).hexdigest(), 16) % self.dim] += 1
-        return v
-
-    def embed_documents(self, texts):
-        return [self._vector(t) for t in texts]
-
-    def embed_query(self, text):
-        return self._vector(text)
 
 
 @pytest.fixture(scope="module")
