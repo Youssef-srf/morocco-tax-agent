@@ -9,6 +9,7 @@ authors = [
 requires-python = ">=3.12"
 dependencies = [
     "pdfplumber>=0.11.10",
+    "pydantic>=2.14.1",
 ]
 
 [project.scripts]
@@ -17,3 +18,8 @@ casa-immo-agent = "casa_immo_agent:main"
 [build-system]
 requires = ["uv_build>=0.13.4,<0.14.0"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
